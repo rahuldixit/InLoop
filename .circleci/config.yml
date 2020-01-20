@@ -8,4 +8,10 @@ orbs:
 workflows:
   build:
     jobs:
-      - cypress/run # "run" job comes from "cypress" orb
+      - cypress/run:
+          command: npm run cypress #run custom command to clean reports, run tests, merge and generate reports
+          store_artifacts: true
+          post-steps:
+            - store_test_results:
+                path: ./cypress/results
+                

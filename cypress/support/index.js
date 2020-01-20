@@ -19,17 +19,11 @@ import './commands';
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 import {Log} from "./../Log/Log";
-import {DataReader} from "./../Data/DataReader";
-
-
-var dataReader = new DataReader();
-
 
     //Hooks
     before(async function () {
         // runs once before all tests in the block        
-        //await dataReader.parseFile("C:\CypressRahul\Tests\cypress\Data\TestData.xlsx");        
-
+ 
     });
     after(function () {
         // runs once after all tests in the block

@@ -7,8 +7,8 @@
              "reportDir": "./cypress/reports",
               "quiet": true,
               "overwrite": true,
-              "html": false,
-              "json": true            
+              "html": true,
+              "json": false            
         },
         "watchForFileChanges" :	false,
         
