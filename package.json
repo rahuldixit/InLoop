@@ -1,0 +1,39 @@
+{
+  "name": "CafeTownsend",
+  "version": "1.0.0",
+  "description": "Scripts to run tests and merge and generate reports",
+  "main": "index.js",
+  "scripts": {
+    "clean-reports": "rm ./cypress/reports/*.*",
+    "test": "npx cypress run",
+    "merge-report": "npx mochawesome-merge --reportDir ./cypress/reports/mocha/ ./cypress/reports/full_report.json",
+    "generate-report": "npx mochawesome-report-generator --reportDir ./cypress/reports cypress/reports/full_report.json",
+    "after:tests": "npm run merge-report; npm run generate-report",
+    "cypress": "npm run clean-reports; npm run test; npm run after:tests"
+  },
+  "author": "Rahul Dixit",
+  "license": "ISC",
+  "dependencies": {
+    "cypress-cucumber-preprocessor": "^2.0.1",
+    "cypress-multi-reporters": "^1.2.3",
+    "exceljs": "^3.6.0",
+    "file-system": "^2.2.2",
+    "fs": "0.0.1-security",
+    "level-filesystem": "^1.2.0",
+    "linq-to-typescript": "^6.0.1",
+    "mocha": "^5.2.0",
+    "mochawesome": "^4.1.0",
+    "rm": "^0.1.8",
+    "tsify": "^4.0.1",
+    "typescript": "^3.7.5",
+    "webpack-preprocessor": "^0.1.12"
+  },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": true
+  },
+  "devDependencies": {
+    "@cypress/mocha-teamcity-reporter": "^1.0.0",
+    "@types/node": "^13.1.8",
+    "cypress": "^3.8.2"
+  }
+}

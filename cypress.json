@@ -1,0 +1,42 @@
+{    
+        "baseUrl":	"http://cafetownsend-angular-rails.herokuapp.com/login",
+        "numTestsKeptInMemory" :	50,
+        "port":	4300,
+        "reporter": "mochawesome",
+        "reporterOptions": {
+             "reportDir": "./cypress/reports",
+              "quiet": true,
+              "overwrite": true,
+              "html": false,
+              "json": true            
+        },
+        "watchForFileChanges" :	false,
+        
+        "defaultCommandTimeout":	10000,
+        "execTimeout" :	10000,
+        "taskTimeout" :	10000,
+        "pageLoadTimeout":	60000,
+        "requestTimeout":	60000,
+        "responseTimeout":	60000,
+        
+        "pluginsFile":	"./cypress/plugins/index.js",
+       
+        "fileServerFolder" : "./cypress",
+        "fixturesFolder"   : "./cypress/fixtures",
+        
+        "integrationFolder": "./cypress/integration",
+        "testFiles"     :       "*.{feature, features}",
+        "screenshotsFolder": "./cypress/screenshots",
+        "supportFile":	"./cypress/support/index.js",
+        
+        "videosFolder":	"./cypress/videos",
+        "trashAssetsBeforeRuns":	true,
+        "videoCompression":	32,
+        "video":	true,
+        "videoUploadOnPasses":	true,
+        
+        "chromeWebSecurity":	true,
+        
+        "animationDistanceThreshold":	5,
+        "waitForAnimations":	true	
+}
