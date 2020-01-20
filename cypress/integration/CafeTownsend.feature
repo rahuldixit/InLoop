@@ -28,3 +28,4 @@ Feature: Cafe Townsend
     #asserts that an additional records is deleted
     When I logout
     Then I logout correctly
+    #
