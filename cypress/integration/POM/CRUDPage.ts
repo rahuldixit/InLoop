@@ -1,4 +1,5 @@
 import {Page} from "./Page";
+import { isNullOrUndefined } from "util";
 
 export  class CRUDPage extends Page {
   
@@ -8,32 +9,42 @@ export  class CRUDPage extends Page {
   editButton = "#bEdit";
   deleteButton = "#bDelete";
   logoutButton = ".main-button";
-  employeeList = "#employee-list"
-    
+  employeeList = "#employee-list";
+  userEntryMap = new Map<string, Object>(); 
   //actions
   public create()
   {
     cy.get(this.createButton).click();  
   }
   
-  public getNoEntries(fullName: string) : number
-  {
-    let noEntries: number = 0;
+  public checkNoEntries(fullName: string, operation: string) 
+  { if(isNullOrUndefined(this.userEntryMap.get(fullName)))
+    {
+      this.userEntryMap.set(fullName, [0,0] ); //entry[0] =  current number of entries, entry[1] = previous number of entries
+    }
     
-      let a = cy.get(this.employeeList).find('li').each( (x) =>
-      {  
-        var entryName = x.text().trim();
+    var entries = this.userEntryMap.get(fullName);
+    entries[0]=0;
+    
+    cy.get(this.employeeList).find('li').each( (x) =>
+      { var entryName = x.text().trim();
         if (entryName.localeCompare(fullName)==0)
         { 
-           ++noEntries;                              
-        }             
-        
-      }).then(():number=>{return noEntries;});
-      
-      
-    //cy.log('w'+ a.then());
-    
-    return 1;
+           ++entries[0];                              
+        }                     
+      }).then(()=>{
+        if(operation == "initial")
+        { entries[1] = entries[0];                    
+        }
+        else if(operation == "create" || operation == "edit")
+        { 
+          assert.equal(entries[0], ++entries[1]);          
+        }
+        else if (operation == "delete" || operation == "edit and delete")
+        { assert.equal(entries[0], --entries[1]);          
+        }
+        this.userEntryMap.set(fullName,entries);          
+      });      
   }
 
   public edit(fullName: string)
@@ -49,6 +60,7 @@ export  class CRUDPage extends Page {
     cy.get(this.employeeList).contains(fullName).first().click();
     cy.get(this.deleteButton).click();  
     cy.on('window:alert',cy.stub());
+    cy.wait(5000);
   }
 
   public logout()

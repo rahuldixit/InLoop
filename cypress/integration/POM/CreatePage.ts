@@ -1,7 +1,6 @@
 import {Page} from "./Page";
 import {UserRecord} from "../../DataObjects/UserRecord";
 
-
 export class CreatePage extends Page {
   
   //elements

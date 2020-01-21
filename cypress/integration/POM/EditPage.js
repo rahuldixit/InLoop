@@ -37,13 +37,11 @@ var EditPage = /** @class */ (function (_super) {
         this.keyWords.EnterText(this.emailField, userRecord.email);
         cy.get("button[type='submit']").contains(this.updateButtonText).click();
     };
-    EditPage.prototype.getUserDetails = function () {
-        var userRecord;
-        userRecord.firstName = cy.get(this.firstNameField).invoke('val').toString();
-        userRecord.lastName = cy.get(this.lastNameField).invoke('val').toString();
-        userRecord.startDate = cy.get(this.startDateField).invoke('val').toString();
-        userRecord.email = cy.get(this.emailField).invoke('val').toString();
-        return userRecord;
+    EditPage.prototype.checkUserDetails = function (userRecord) {
+        cy.get(this.firstNameField).invoke('val').then(function (x) { assert(userRecord.firstName, x.toString()); });
+        cy.get(this.lastNameField).invoke('val').then(function (x) { assert(userRecord.lastName, x.toString()); });
+        cy.get(this.startDateField).invoke('val').then(function (x) { assert(userRecord.startDate, x.toString()); });
+        cy.get(this.emailField).invoke('val').then(function (x) { assert(userRecord.email, x.toString()); });
     };
     EditPage.prototype.deleteRecord = function () {
         cy.get(".main-button").contains(this.deleteButtonText).click();

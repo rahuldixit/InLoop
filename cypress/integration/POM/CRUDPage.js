@@ -14,6 +14,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var Page_1 = require("./Page");
+var util_1 = require("util");
 var CRUDPage = /** @class */ (function (_super) {
     __extends(CRUDPage, _super);
     function CRUDPage() {
@@ -25,22 +26,37 @@ var CRUDPage = /** @class */ (function (_super) {
         _this.deleteButton = "#bDelete";
         _this.logoutButton = ".main-button";
         _this.employeeList = "#employee-list";
+        _this.userEntryMap = new Map();
         return _this;
     }
     //actions
     CRUDPage.prototype.create = function () {
         cy.get(this.createButton).click();
     };
-    CRUDPage.prototype.getNoEntries = function (fullName) {
-        var noEntries = 0;
-        var a = cy.get(this.employeeList).find('li').each(function (x) {
+    CRUDPage.prototype.checkNoEntries = function (fullName, operation) {
+        var _this = this;
+        if (util_1.isNullOrUndefined(this.userEntryMap.get(fullName))) {
+            this.userEntryMap.set(fullName, [0, 0]); //entry[0] =  current number of entries, entry[1] = previous number of entries
+        }
+        var entries = this.userEntryMap.get(fullName);
+        entries[0] = 0;
+        cy.get(this.employeeList).find('li').each(function (x) {
             var entryName = x.text().trim();
             if (entryName.localeCompare(fullName) == 0) {
-                ++noEntries;
+                ++entries[0];
             }
-        }).then(function () { return noEntries; });
-        //cy.log('w'+ a.then());
-        return 1;
+        }).then(function () {
+            if (operation == "initial") {
+                entries[1] = entries[0];
+            }
+            else if (operation == "create" || operation == "edit") {
+                assert.equal(entries[0], ++entries[1]);
+            }
+            else if (operation == "delete" || operation == "edit and delete") {
+                assert.equal(entries[0], --entries[1]);
+            }
+            _this.userEntryMap.set(fullName, entries);
+        });
     };
     CRUDPage.prototype.edit = function (fullName) {
         cy.get(this.employeeList).contains(fullName).first().should('be.visible');
@@ -52,6 +68,7 @@ var CRUDPage = /** @class */ (function (_super) {
         cy.get(this.employeeList).contains(fullName).first().click();
         cy.get(this.deleteButton).click();
         cy.on('window:alert', cy.stub());
+        cy.wait(5000);
     };
     CRUDPage.prototype.logout = function () {
         cy.get(this.logoutButton).click();

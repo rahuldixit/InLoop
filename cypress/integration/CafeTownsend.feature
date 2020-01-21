@@ -7,25 +7,21 @@ Feature: Cafe Townsend
     When I create new profile:
     |FirstName  |LastName   |StartDate  |Email                      |
     |Rahul      |Dixit      |today      |rahul.dixit.zero@gmail.com |
-    #Then the correct number of entries is displayed    
-    #asserts that an additional records is created
-    #Then profile is updated correctly    
+    Then the correct number of entries is displayed after: "add"
+    Then profile is updated correctly 
     When I edit the new profile:
     |FirstName  |LastName   |StartDate  |Email                      |
     |Tom        |Harry      |next week  |tom.harry.zero@gmail.com   |
-    #Then profile is updated correctly
+    Then the correct number of entries is displayed after: "edit"     
+    Then profile is updated correctly    
     When I edit and delete the new profile
-    #Then the correct number of entries is displayed    
-    #asserts that an additional records is deleted
-    #Then profile is updated correctly
+    Then the correct number of entries is displayed after: "edit and delete"
+    Then profile is updated correctly
     When I create new profile:
     |FirstName  |LastName   |StartDate  |Email                      |
     |Rahul      |Dixit      |today      |rahul.dixit.zero@gmail.com |
-    #Then the correct number of entries is displayed    
-    #asserts that an additional records is created
+    Then the correct number of entries is displayed after: "create"  
     When I delete the new profile
-    #Then the correct number of entries is displayed    
-    #asserts that an additional records is deleted
+    Then the correct number of entries is displayed after: "delete"   
     When I logout
     Then I logout correctly
-    #

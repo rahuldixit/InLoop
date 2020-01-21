@@ -10,7 +10,6 @@ var userRecord :UserRecord;
 var crudPage = new CRUDPage();
 var createPage = new CreatePage();
 var editPage = new EditPage();
-var noEntries = 0;
 
 When("I create new profile:", (tbl) => {    
   var testData = tbl.rawTable.slice(1)[0];
@@ -18,20 +17,19 @@ When("I create new profile:", (tbl) => {
   userRecord = new UserRecord(testData[0],testData[1],DateCalculator(testData[2]),testData[3]);
   
   crudPage.isPageLoaded();  
-  noEntries = crudPage.getNoEntries(userRecord.firstName+" "+userRecord.lastName);      
+  crudPage.checkNoEntries(userRecord.firstName+" "+userRecord.lastName, "initial");      
   
   crudPage.create();
   createPage.createRecord(userRecord);
   crudPage.isPageLoaded();
-  ++noEntries;  
 });
 
 When("I edit the new profile:",  (tbl) => {
   var testData = tbl.rawTable.slice(1)[0];
-  
+  crudPage.checkNoEntries(testData[0]+" "+testData[1], "initial");          
   crudPage.edit(userRecord.firstName+" "+userRecord.lastName);
   editPage.isPageLoaded();
-
+  
   userRecord = new UserRecord(testData[0],testData[1],DateCalculator(testData[2]),testData[3]);  
   editPage.editAndUpdate(userRecord);
   crudPage.isPageLoaded();
@@ -40,34 +38,28 @@ When("I edit the new profile:",  (tbl) => {
 When("I edit and delete the new profile",  () => {
   crudPage.edit(userRecord.firstName+" "+userRecord.lastName);
   editPage.isPageLoaded();
+
   editPage.deleteRecord();  
   crudPage.isPageLoaded();
-  --noEntries;
 });
 
 When("I delete the new profile",  () => {
   crudPage.delete(userRecord.firstName);
-  --noEntries;
+  crudPage.isPageLoaded();
 });
 
 When("I logout",  () => {
   crudPage.logout();
 });
 
-Then("the correct number of entries is displayed", ()=>  {   
-  var actualEntries = crudPage.getNoEntries(userRecord.firstName+" "+userRecord.lastName);
-  assert.equal(noEntries, actualEntries);
-  
+Then("the correct number of entries is displayed after: {string}", (operation)=>  {   
+  crudPage.checkNoEntries(userRecord.firstName+" "+userRecord.lastName, operation);      
 });
 
-Then("profile is updated correctly", ()=>  {   
+Then("profile is updated correctly", ()=>  {  
   crudPage.edit(userRecord.firstName+" "+userRecord.lastName);
   editPage.isPageLoaded();
 
-  var actualUserDetails = editPage.getUserDetails();
-  assert.equal(userRecord.firstName,actualUserDetails.firstName);
-  assert.equal(userRecord.lastName,actualUserDetails.lastName);
-  assert.equal(userRecord.startDate,actualUserDetails.startDate);
-  assert.equal(userRecord.email,actualUserDetails.email);
+  editPage.checkUserDetails(userRecord);  
   cy.get(editPage.backButton).click();
 });

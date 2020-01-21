@@ -23,14 +23,12 @@ export class EditPage extends Page {
     cy.get("button[type='submit']").contains(this.updateButtonText).click();    
   }
   
-  public getUserDetails() : UserRecord
+  public checkUserDetails(userRecord: UserRecord)
   {
-    let userRecord: UserRecord;
-    userRecord.firstName =  cy.get(this.firstNameField).invoke('val').toString();
-    userRecord.lastName = cy.get(this.lastNameField).invoke('val').toString();
-    userRecord.startDate = cy.get(this.startDateField).invoke('val').toString();
-    userRecord.email = cy.get(this.emailField).invoke('val').toString();
-    return userRecord;
+    cy.get(this.firstNameField).invoke('val').then((x)=>{assert(userRecord.firstName, x.toString())});
+    cy.get(this.lastNameField).invoke('val').then((x)=>{assert(userRecord.lastName, x.toString())});    
+    cy.get(this.startDateField).invoke('val').then((x)=>{assert(userRecord.startDate, x.toString())});
+    cy.get(this.emailField).invoke('val').then((x)=>{assert(userRecord.email, x.toString())});        
   }
 
   public deleteRecord()
