@@ -12,7 +12,6 @@ workflows:
       # cypress/run job comes from "cypress" orb imported above
       - cypress/run:
           record: true
-          executor: cypress/browsers-chrome79
           browser: chrome
           post-steps:
             - store_test_results:
