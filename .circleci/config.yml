@@ -24,7 +24,7 @@ jobs:
             - ~/.npm
             - ~/.cache
       - run: mkdir ~/cypress/reports  
-      - cypress/run:
+      - run:
           command: npm run cypress #run custom command to clean reports, run tests, merge and generate reports
       - store_test_results:
           path: ~/cypress/reports
