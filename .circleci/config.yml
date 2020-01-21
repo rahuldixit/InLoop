@@ -13,7 +13,8 @@ workflows:
       - cypress/run:
           record: true
           browser: chrome
+          store_artifacts: true
           post-steps:
             - store_test_results:
                 path: cypress/results
-            - store_artifacts: true
+            
