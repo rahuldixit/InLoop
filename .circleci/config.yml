@@ -11,7 +11,6 @@ workflows:
       # and runs all Cypress tests and records results on Cypress Dashboard
       # cypress/run job comes from "cypress" orb imported above
       - cypress/run:
-          record: true
           browser: chrome
           store_artifacts: true
           post-steps:

@@ -1,4 +1,6 @@
 {    
+        "projectId": "CafeTownsend",
+        
         "baseUrl":	"http://cafetownsend-angular-rails.herokuapp.com/login",
         "numTestsKeptInMemory" :	50,
         "port":	4300,
