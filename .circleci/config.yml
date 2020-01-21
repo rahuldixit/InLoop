@@ -1,33 +1,20 @@
-version: 2
-jobs:
+# to use orbs, must use version >= 2.1
+version: 2.1
+orbs:
+  # import Cypress orb by specifying an exact version x.y.z
+  # or the latest version 1.x.x
+  cypress: cypress-io/cypress@1
+workflows:
   build:
-    docker:
-      - image: cypress/base:8
-        environment:
-          ## this enables colors in the output
-          TERM: xterm
-    working_directory: ~/cypress
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - v1-deps-master-package.json
-            - v1-deps-master
-            - v1-deps
-      - run:
-          name: Install Dependencies
-          command: npm ci
-      - save_cache:
-          key: v1-deps-master-package.json
-          # cache NPM modules and the folder with the Cypress binary
-          paths:
-            - ~/.npm
-            - ~/.cache
-      - run: mkdir ~/reports  
-      - run: mkdir ~/artifacts  
-      - run:
-          command: npm run cypress #run custom command to clean reports, run tests, merge and generate reports
-      - store_test_results:
-          path: ~/reports
-      - store_artifacts:
-          path: ~/artifacts  
+    jobs:
+      # checks out code, installs npm dependencies
+      # and runs all Cypress tests and records results on Cypress Dashboard
+      # cypress/run job comes from "cypress" orb imported above
+      - cypress/run:
+          record: true
+          executor: cypress/browsers-chrome79
+          browser: chrome
+          post-steps:
+            - store_test_results:
+                path: cypress/results
+            - store_artifacts: true
