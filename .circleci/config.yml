@@ -11,6 +11,6 @@ workflows:
       - cypress/run:
           command: npm run cypress #run custom command to clean reports, run tests, merge and generate reports
           store_artifacts: true
-          store_test_results:
+      - store_test_results:
                 path: cypress/results
                 
