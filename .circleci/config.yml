@@ -8,9 +8,13 @@ orbs:
 workflows:
   build:
     jobs:
+      - run: mkdir ~/cypress
+      - run: mkdir ~/cypress/reports  
       - cypress/run:
           command: npm run cypress #run custom command to clean reports, run tests, merge and generate reports
-          store_artifacts: true
+      - run:
+          command: npm run cypress          
       - store_test_results:
-                path: cypress/results
-                
+          path: ~/cypress/reports
+      - store_artifacts:
+          path: ~/cypress/artifacts  
