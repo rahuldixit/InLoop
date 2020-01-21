@@ -1,15 +1,15 @@
-<<<<<<< HEAD
 # InLoop
-CafeTownsend
+CafeTownsend CRUD Tests
 =======
-# cypress-cucumber-typescript-example
-Example of using Cypress with Cucumber and TypeScript
 
-All the configuration is in [cypress/plugins/index.js](cypress/plugins/index.js)
+This is a sample Cypress archtecture for test suites containing the following important components:
 
-TypeScript step definitions are in [cypress/integration/passWithTypescript](cypress/integration/passWithTypescript)
-
-(I'm using the nonGlobalStepDefinitions configuration in the [package.json](package.json) )
-
-You can also use our Cucumber plugin with TypeScript and webpack: [https://github.com/TheBrainFamily/cypress-cucumber-webpack-typescript-example/](https://github.com/TheBrainFamily/cypress-cucumber-webpack-typescript-example/)
->>>>>>> first commit - test minus assertions working
+1. Typescript/Browserify transpilation to javascript for type based simpler and best practice javascript development
+2. Page Object Model for application modelling
+3. Gherkin and Step Definitions for English style description of business flows
+4. Helper methods to assist with calculations and data processing
+5. Data Objects to model common data entities used throughout the lifecyle of the application
+6. Keyword wrapper to chain multple cypress commands where they are commonly used together
+7. mochawesome reports for html test viewing
+8. Logging capability for textual output debugging for test case failure
+9. Screenshot and video recorded and saved if a test fails
