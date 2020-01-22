@@ -18,7 +18,8 @@ export  class CRUDPage extends Page {
   }
   
   public checkNoEntries(fullName: string, operation: string) 
-  { if(isNullOrUndefined(this.userEntryMap.get(fullName)))
+  { cy.wait(2000);
+    if(isNullOrUndefined(this.userEntryMap.get(fullName)))
     {
       this.userEntryMap.set(fullName, [0,0] ); //entry[0] =  current number of entries, entry[1] = previous number of entries
     }
@@ -29,11 +30,10 @@ export  class CRUDPage extends Page {
     cy.get(this.employeeList).find('li').each( (x) =>
       { var entryName = x.text().trim();
         if (entryName.localeCompare(fullName)==0)
-        { 
-           ++entries[0];                              
+        {  ++entries[0];                              
         }                     
       }).then(()=>{
-        if(operation == "initial")
+        if(operation == "initial" )
         { entries[1] = entries[0];                    
         }
         else if(operation == "create" || operation == "edit")
@@ -59,8 +59,7 @@ export  class CRUDPage extends Page {
     cy.get(this.employeeList).contains(fullName).first().should('be.visible');
     cy.get(this.employeeList).contains(fullName).first().click();
     cy.get(this.deleteButton).click();  
-    cy.on('window:alert',cy.stub());
-    cy.wait(5000);
+    cy.on('window:alert',cy.stub());   
   }
 
   public logout()

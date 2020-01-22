@@ -28,9 +28,8 @@ var LoginPage = /** @class */ (function (_super) {
     }
     //actions
     LoginPage.prototype.login = function () {
-        cy.get(this.credentials).invoke('text').then(function (x) { cy.log(x.toString().match('/(?s)(?<=Username: ").*?(?=")/gm').toString()); });
-        cy.get(this.username).type(cy.get(this.credentials).invoke('text').then(function (x) { x.text().match('(?s)(?<=Username: ").*?(?=")'); }).toString());
-        cy.get(this.password).type(cy.get(this.credentials).invoke('text').then(function ($_) { return $_.text().match('(?s)(?<=Password: ").*?(?=")'); }).toString());
+        cy.get(this.username).type("Luke");
+        cy.get(this.password).type("Skywalker");
         cy.get(this.submit).click();
     };
     return LoginPage;

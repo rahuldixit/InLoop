@@ -7,7 +7,7 @@ Feature: Cafe Townsend
     When I create new profile:
     |FirstName  |LastName   |StartDate  |Email                      |
     |Rahul      |Dixit      |today      |rahul.dixit.zero@gmail.com |
-    Then the correct number of entries is displayed after: "add"
+    Then the correct number of entries is displayed after: "create"
     Then profile is updated correctly 
     When I edit the new profile:
     |FirstName  |LastName   |StartDate  |Email                      |

@@ -35,6 +35,7 @@ var CRUDPage = /** @class */ (function (_super) {
     };
     CRUDPage.prototype.checkNoEntries = function (fullName, operation) {
         var _this = this;
+        cy.wait(2000);
         if (util_1.isNullOrUndefined(this.userEntryMap.get(fullName))) {
             this.userEntryMap.set(fullName, [0, 0]); //entry[0] =  current number of entries, entry[1] = previous number of entries
         }
@@ -68,7 +69,6 @@ var CRUDPage = /** @class */ (function (_super) {
         cy.get(this.employeeList).contains(fullName).first().click();
         cy.get(this.deleteButton).click();
         cy.on('window:alert', cy.stub());
-        cy.wait(5000);
     };
     CRUDPage.prototype.logout = function () {
         cy.get(this.logoutButton).click();
