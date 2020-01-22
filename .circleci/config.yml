@@ -27,7 +27,7 @@ jobs:
           command: npx cypress run --reporter cypress-multi-reporters --reporter-options configFile=reports.json
       - run:
           name: Merge Mocha report 
-          command: npx mochawesome-merge ./cypress/reports/*.json>./cypress/reports/full_report.json  
+          command: npx mochawesome-merge ./cypress/reports/mochawesome.json>./cypress/reports/full_report.json  
       - run:
           name: Merge Mocha report 
           command: npx mochawesome-report-generator ./cypress/reports/full_report.json --reportDir ./cypress/reports/ --reportFilename full_report.html                             
