@@ -19,7 +19,7 @@ jobs:
             echo "and commit 'package-lock.json' to your repo."
             exit 1
           fi
-        working_directory: ''
+        working_directory: '~/cypress'
     - run:
         name: Npm CI
         command: npm ci
