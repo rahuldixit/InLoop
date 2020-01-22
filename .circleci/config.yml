@@ -4,9 +4,8 @@ orbs:
   # import Cypress orb by specifying an exact version x.y.z
   # or the latest version 1.x.x
   cypress: cypress-io/cypress@1
-workflows:
-  build:
-    jobs:
+
+jobs:
 
       steps:
         - run:
