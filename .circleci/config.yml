@@ -25,7 +25,9 @@ jobs:
             - ~/.cache
       - run:
           name: Running E2E tests with Mochawesome reporter
-          command: npx cypress run --reporter mochawesome --reporter-options reportDir=cypress/reports,overwrite=false,html=false,json=true      
+          command: npx cypress run --reporter mochawesome --reporter-options reportDir=cypress/reports,overwrite=false,html=false,json=true 
+          command: npx mochawesome-merge ./cypress/reports/*.json>./cypress/reports/full_report.json         
+          command: npx mochawesome-report-generator ./cypress/reports/full_report.json --reportDir ./cypress/reports/ --reportFilename full_report.html      
       - store_test_results:
           path: cypress/reports
       - store_artifacts:
