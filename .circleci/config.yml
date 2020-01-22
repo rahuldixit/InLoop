@@ -6,13 +6,13 @@ orbs:
   cypress: cypress-io/cypress@1
 workflows:
   build:
-    steps:
-      - run: mkdir test-results
       
     jobs:
       # checks out code, installs npm dependencies
       # and runs all Cypress tests and records results on Cypress Dashboard
       # cypress/run job comes from "cypress" orb imported above
+      steps:
+      - run: mkdir test-results    
       - cypress/run:
           browser: electron
           store_artifacts: true
