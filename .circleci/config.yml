@@ -8,7 +8,6 @@ jobs:
         environment:
           ## this enables colors in the output
           TERM: xterm
-    working_directory: ~/cypress
     parallelism: 1
     steps:
       - checkout
@@ -25,13 +24,13 @@ jobs:
             - ~/.cache
       - run:
           name: Running E2E tests 
-          command: npx cypress run --reporter mochawesome --reporter-options reportDir=reports,overwrite=false,html=false,json=true 
+          command: npx cypress run --reporter mochawesome --reporter-options reportDir=./cypress/reports,overwrite=false,html=false,json=true 
       - run:
           name: Merge Mochawesome reports
-          command: npx mochawesome-merge ./reports/mochawesome.json>./reports/full_report.json                   
+          command: npx mochawesome-merge ./cypress/reports/mochawesome.json>./cypress/reports/full_report.json                   
       - run:
           name: Generate Mochawesome reports
-          command: npx mochawesome-report-generator ./reports/full_report.json --reportDir ./reports/ --reportFilename full_report.html      
+          command: npx mochawesome-report-generator ./cypress/reports/full_report.json --reportDir ./cypress/reports/ --reportFilename full_report.html      
       - store_test_results:
           path: cypress/reports
       - store_artifacts:
@@ -39,4 +38,4 @@ jobs:
       - store_artifacts:
           path: cypress/screenshots
       - store_artifacts:
-          path: reports
+          path: cypress/reports
