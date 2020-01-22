@@ -12,8 +12,9 @@ workflows:
       # cypress/run job comes from "cypress" orb imported above
       - cypress/run:
           browser: electron
+          reporter: mochawesome
           store_artifacts: true
           post-steps:
             - store_test_results:
-                path: ./
+                path: results
             
