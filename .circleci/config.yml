@@ -1,19 +1,56 @@
-# to use orbs, must use version >= 2.1
-version: 2.1
-orbs:
-  # import Cypress orb by specifying an exact version x.y.z
-  # or the latest version 1.x.x
-  cypress: cypress-io/cypress@1
+# Orb 'cypress-io/cypress@1' resolved to 'cypress-io/cypress@1.13.0'
+version: 2
+jobs:
+  cypress/run:
+    docker:
+    - image: cypress/base:10
+    parallelism: 1
+    steps:
+    - checkout
+    - restore_cache:
+        keys:
+        - cache-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
+    - run:
+        name: Check if package-lock.json exists
+        command: |
+          if [ ! -e ./package-lock.json ]; then
+            echo "The Cypress orb uses 'npm ci' to install 'node_modules', which requires a 'package-lock.json'."
+            echo "A 'package-lock.json' file was not found. Please run 'npm install' in your project,"
+            echo "and commit 'package-lock.json' to your repo."
+            exit 1
+          fi
+        working_directory: ''
+    - run:
+        name: Npm CI
+        command: npm ci
+        working_directory: ''
+    - run:
+        name: Verify Cypress
+        command: npx cypress verify
+        working_directory: ''
+    - save_cache:
+        key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
+        paths:
+        - ~/.npm
+        - ~/.cache
+    - persist_to_workspace:
+        root: ~/
+        paths:
+        - project
+        - .cache/Cypress
+    - run:
+        name: Run Cypress tests
+        no_output_timeout: 10m
+        command: "npx run cypress"
+        working_directory: ''
+    - store_artifacts:
+        path: cypress/videos
+    - store_artifacts:
+        path: cypress/screenshots
+    - store_test_results:
+        path: cypress/reports
 workflows:
   build:
     jobs:
-      # checks out code, installs npm dependencies
-      # and runs all Cypress tests and records results on Cypress Dashboard
-      # cypress/run job comes from "cypress" orb imported above
-      - cypress/run:
-          browser: electron
-          store_artifacts: true
-          post-steps:
-            - store_test_results:
-                path: cypress/reports
-            
+    - cypress/run
+  version: 2
