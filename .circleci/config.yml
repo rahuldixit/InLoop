@@ -15,6 +15,5 @@ workflows:
           browser: electron
           store_artifacts: true
           post-steps:
-            - store_test_results:
-                path: reports
+            - store_test_results: true
             
