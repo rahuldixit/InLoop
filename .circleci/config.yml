@@ -19,15 +19,15 @@ jobs:
             echo "and commit 'package-lock.json' to your repo."
             exit 1
           fi
-        working_directory: 'cypress'
+        working_directory: ''
     - run:
         name: Npm CI
         command: npm ci
-        working_directory: 'cypress'
+        working_directory: ''
     - run:
         name: Verify Cypress
         command: npx cypress verify
-        working_directory: 'cypress'
+        working_directory: ''
     - save_cache:
         key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
         paths:
@@ -42,7 +42,7 @@ jobs:
         name: Run Cypress tests
         no_output_timeout: 10m
         command: "npm run cypress"
-        working_directory: 'cypress'
+        working_directory: '~/cypress'
     - store_artifacts:
         path: videos
     - store_artifacts:
