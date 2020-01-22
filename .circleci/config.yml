@@ -41,7 +41,7 @@ jobs:
     - run:
         name: Run Cypress tests
         no_output_timeout: 10m
-        command: "npx cypress run"
+        command: npx cypress run
         working_directory: '~/cypress'
     - store_artifacts:
         path: videos
