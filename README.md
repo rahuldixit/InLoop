@@ -10,6 +10,6 @@ This is a sample Cypress archtecture for test suites containing the following im
 4. Helper methods to assist with calculations and data processing
 5. Data Objects to model common data entities used throughout the lifecyle of the application
 6. Keyword wrapper to chain multple cypress commands where they are commonly used together
-7. Mochawesome reports for html test viewing
+7. Mochawesome reports for html test viewing in artifacts folder, test summary in front page (circleci)
 8. Logging capability for textual output debugging for test case failure
 9. Screenshot and Video recorded and saved if a test fails
