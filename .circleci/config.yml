@@ -33,10 +33,10 @@ jobs:
           name: Generate Mochawesome reports
           command: npx mochawesome-report-generator ./reports/full_report.json --reportDir ./reports/ --reportFilename full_report.html      
       - store_test_results:
-          path: reports
+          path: cypress/reports
       - store_artifacts:
-          path: videos
+          path: cypress/videos
       - store_artifacts:
-          path: screenshots
+          path: cypress/screenshots
       - store_artifacts:
           path: reports
