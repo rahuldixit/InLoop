@@ -4,14 +4,16 @@ orbs:
   # import Cypress orb by specifying an exact version x.y.z
   # or the latest version 1.x.x
   cypress: cypress-io/cypress@1
-
-jobs:
-
-      steps:
-        - run:
-            name: Run cypress test and generate report
-            command: npm run cypress
-        - store_artifacts: true
-        - store_test_results:
-                 path: results
+workflows:
+  build:
+    jobs:
+      # checks out code, installs npm dependencies
+      # and runs all Cypress tests and records results on Cypress Dashboard
+      # cypress/run job comes from "cypress" orb imported above
+      - cypress/run:
+          browser: chrome
+          store_artifacts: true
+          post-steps:
+            - store_test_results:
+                path: cypress/results
             
