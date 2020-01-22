@@ -42,13 +42,13 @@ jobs:
         name: Run Cypress tests
         no_output_timeout: 10m
         command: "npm run cypress"
-        working_directory: ''
+        working_directory: '~/cypress'
     - store_artifacts:
-        path: cypress/videos
+        path: videos
     - store_artifacts:
-        path: cypress/screenshots
+        path: screenshots
     - store_test_results:
-        path: cypress/reports
+        path: reports
 workflows:
   build:
     jobs:
