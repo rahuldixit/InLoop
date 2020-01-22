@@ -9,14 +9,14 @@ workflows:
   build:
     jobs:
         steps:
-      - cypress/run: # "run" job comes from "cypress" orb
+       cypress/run: # "run" job comes from "cypress" orb
             browser: electron
             command: npx cypress run --reporter mochawesome
-    - store_artifacts:
+    store_artifacts:
         path: videos
-    - store_artifacts:
+     store_artifacts:
         path: screenshots
-    - store_test_results:
+     store_test_results:
         path: reports
 workflows:
   build:
