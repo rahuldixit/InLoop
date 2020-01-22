@@ -24,6 +24,9 @@ jobs:
             - ~/.npm
             - ~/.cache
       - run: npm run cypress 
-      - store-artifacts: true
-      - store-test-artifacts:
-         path: cypress/reports
+      - store_artifacts: 
+          path: cypress/screenshots
+      - store_artifacts: 
+          path: cypress/videos
+      - store_test_artifacts:
+            path: cypress/reports
