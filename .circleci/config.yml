@@ -28,5 +28,5 @@ jobs:
           path: cypress/screenshots
       - store_artifacts: 
           path: cypress/videos
-      - store_test_artifacts:
+      - store_test_results:
             path: cypress/reports
