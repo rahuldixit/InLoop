@@ -23,7 +23,8 @@ jobs:
           paths:
             - ~/.npm
             - ~/.cache
-      - run: npm run cypress 
+      - cypress/run: 
+          browser: electron
       - store_artifacts: 
           path: cypress/screenshots
       - store_artifacts: 
