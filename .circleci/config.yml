@@ -7,6 +7,8 @@ orbs:
 workflows:
   build:
     jobs:
+      -run:
+        command: mkdir test-results
       # checks out code, installs npm dependencies
       # and runs all Cypress tests and records results on Cypress Dashboard
       # cypress/run job comes from "cypress" orb imported above

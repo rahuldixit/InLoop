@@ -4,12 +4,11 @@
   "description": "Scripts to run tests and merge and generate reports",
   "main": "index.js",
   "scripts": {
-    "clean-reports": "Remove-Item -LiteralPath \"./cypress/reports\" -Force -Recurse",
     "test": "npx cypress run",
     "merge-report": "npx mochawesome-merge ./cypress/reports/tests/*.json>./cypress/reports/full_report.json",
     "generate-report": "npx mochawesome-report-generator ./cypress/reports/full_report.json --reportDir ./cypress/reports/ --reportFilename full_report.html",
     "after:tests": "npm run merge-report & npm run generate-report",
-    "cypress": "npm run clean-reports & npm run test & npm run after:tests"
+    "cypress": "npm run test & npm run after:tests"
   },
   "author": "Rahul Dixit",
   "license": "ISC",
