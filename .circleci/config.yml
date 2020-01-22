@@ -6,7 +6,6 @@ jobs:
         environment:
           ## this enables colors in the output
           TERM: xterm
-    working_directory: ~/cypress
     steps:
       - checkout
       - restore_cache:
@@ -23,8 +22,7 @@ jobs:
           paths:
             - ~/.npm
             - ~/.cache
-      - cypress/run: 
-          browser: electron
+      - run: npm run cypress 
       - store_artifacts: 
           path: cypress/screenshots
       - store_artifacts: 
