@@ -19,12 +19,13 @@
     "mochawesome": "^4.1.0",
     "tsify": "^4.0.1",
     "typescript": "^3.7.5"
-    },
+  },
   "cypress-cucumber-preprocessor": {
     "nonGlobalStepDefinitions": true
   },
   "devDependencies": {
     "@types/node": "^13.1.8",
-    "cypress": "^3.8.2"
+    "cypress": "^3.8.2",
+    "mocha-junit-reporter": "^1.23.3"
   }
 }
