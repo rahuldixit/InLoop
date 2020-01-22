@@ -9,7 +9,7 @@ jobs:
     - checkout
     - restore_cache:
         keys:
-        - cache-InLoop-master-{{ checksum "package.json" }}
+        - cache-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
     - run:
         name: Check if package-lock.json exists
         command: |
@@ -29,7 +29,7 @@ jobs:
         command: npx cypress verify
         working_directory: ''
     - save_cache:
-        key: cache-InLoop-master-{{ checksum "package.json" }}
+        key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
         paths:
         - ~/.npm
         - ~/.cache
@@ -41,14 +41,14 @@ jobs:
     - run:
         name: Run Cypress tests
         no_output_timeout: 10m
-        command: "npm run cypress"
-        working_directory: ''
+        command: "npx cypress run"
+        working_directory: '~/cypress'
     - store_artifacts:
-        path: ~/cypress/videos
+        path: videos
     - store_artifacts:
-        path: ~/cypress/screenshots
+        path: screenshots
     - store_test_results:
-        path: ~/cypress/reports
+        path: reports
 workflows:
   build:
     jobs:
