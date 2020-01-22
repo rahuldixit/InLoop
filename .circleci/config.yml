@@ -25,10 +25,10 @@ jobs:
             - ~/.cache
       - run:
           name: Running E2E tests with Mochawesome reporter
-          command: npx cypress run 
+          command: npm run cypress
       - store_test_results:
           path: reports
       - store_artifacts:
           path: videos
       - store_artifacts:
-          path: cypress/screenshots
+          path: screenshots
