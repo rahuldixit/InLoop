@@ -8,9 +8,10 @@ orbs:
 workflows:
   build:
     jobs:
+        steps:
       - cypress/run: # "run" job comes from "cypress" orb
-        browser: electron
-        command: npx cypress run --reporter mochawesome
+            browser: electron
+            command: npx cypress run --reporter mochawesome
     - store_artifacts:
         path: videos
     - store_artifacts:
