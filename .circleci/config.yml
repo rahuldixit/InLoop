@@ -7,13 +7,12 @@ orbs:
 workflows:
   build:
     jobs:
-      # checks out code, installs npm dependencies
-      # and runs all Cypress tests and records results on Cypress Dashboard
-      # cypress/run job comes from "cypress" orb imported above
-      - run:
-          name: Run cypress test and generate report
-          command: npm run cypress
-      - store_artifacts: true
-      - store_test_results:
-                path: results
+
+      steps:
+        - run:
+            name: Run cypress test and generate report
+            command: npm run cypress
+        - store_artifacts: true
+        - store_test_results:
+                 path: results
             
