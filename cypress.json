@@ -1,12 +1,10 @@
 {    
-        "projectId": "CafeTownsend",
-        
         "baseUrl":	"http://cafetownsend-angular-rails.herokuapp.com/login",
         "numTestsKeptInMemory" :	50,
         "port":	4300,
         "reporter": "mochawesome",
         "reporterOptions": {
-             "reportDir": "./cypress/reports/tests",
+             "reportDir": "./cypress/reports",
               "quiet": true,
               "overwrite": true,
               "html": false,
