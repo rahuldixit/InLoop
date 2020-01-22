@@ -1,31 +1,19 @@
-version: 2
-jobs:
+# to use orbs, must use version >= 2.1
+version: 2.1
+orbs:
+  # import Cypress orb by specifying an exact version x.y.z
+  # or the latest version 1.x.x
+  cypress: cypress-io/cypress@1
+workflows:
   build:
-    docker:
-      - image: cypress/base:8
-        environment:
-          ## this enables colors in the output
-          TERM: xterm
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
-            - v1-deps-{{ .Branch }}
-            - v1-deps
-      - run:
-          name: Install Dependencies
-          command: npm ci
-      - save_cache:
-          key: v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
-          # cache NPM modules and the folder with the Cypress binary
-          paths:
-            - ~/.npm
-            - ~/.cache
-      - run: npm run cypress 
-      - store_artifacts: 
-          path: cypress/screenshots
-      - store_artifacts: 
-          path: cypress/videos
-      - store_test_results:
-            path: cypress/reports
+    jobs:
+      # checks out code, installs npm dependencies
+      # and runs all Cypress tests and records results on Cypress Dashboard
+      # cypress/run job comes from "cypress" orb imported above
+      - cypress/run:
+          browser: electron
+          store_artifacts: true
+          post-steps:
+            - store_test_results:
+                path: cypress/reports
+            
