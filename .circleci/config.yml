@@ -24,7 +24,7 @@ jobs:
             - ~/.cache
       - run:
           name: Running E2E tests 
-          command: npx cypress run --reporter cypress-multi-reporters --reporter-options configFile=reports.json
+          command: npx cypress run --reporter cypress-multi-reporters --reporter-options configFile=reports.json --record --key 59ebea57-7d86-4e86-891e-92c68a93c6bd
       - run:
           name: Merge Mocha report 
           command: npx mochawesome-merge ./cypress/reports/mochawesome.json>./cypress/reports/full_report.json  
