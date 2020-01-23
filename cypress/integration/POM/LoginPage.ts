@@ -12,8 +12,8 @@ export  class LoginPage extends Page {
   //actions
   public login()
   {
-     cy.get(this.username).type("Luke");   
-     cy.get(this.password).type("Skywalker");    
+     this.keyWords.EnterText(this.username,"Luke");   
+     this.keyWords.EnterText(this.password,"Skywalker");    
      cy.get(this.submit).click(); 
   } 
 }
