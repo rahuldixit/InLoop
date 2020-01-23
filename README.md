@@ -15,4 +15,5 @@ This is a sample Cypress archtecture for test suites containing the following im
 9. Screenshot and Video recorded and saved if a test fails
 
 If you are pulling from the github repo and want to run it locally, please remember to do an 'npm update' then 'npx cypress run --browser=chrome'
+
 If you want to see the flow working with circleci, make a cosmetic change like add a comment to the feature file '#abc' and commit. the workflow should be automtically triggered.
