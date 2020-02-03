@@ -1,19 +1,32 @@
 export function DateCalculator(desiredDate: string) : string 
 {
-    var date;
     var dateCalc = new Date();
-        
-    switch(desiredDate)
-    {
-        case "today":
-            date = dateCalc.getFullYear()+"-"+ ("0" + (dateCalc.getMonth() + 1)).slice(-2)+"-"+dateCalc.getDate();
-            break;
-        case "next week":
-            date = dateCalc.getFullYear()+"-"+ ("0" + (dateCalc.getMonth() + 1)).slice(-2)+"-"+(dateCalc.getDate()+1);
-            break;
-        default:
-            date = dateCalc.getFullYear()+"-"+ ("0" + (dateCalc.getMonth() + 1)).slice(-2)+"-"+dateCalc.getDate();
-            break;
-    }    
-    return date.toString();
+
+    var year = dateCalc.getFullYear();
+    var month = (dateCalc.getMonth()+1).toString();
+    if (parseInt(month)<10)
+        month = '0'+month;
+
+    var day = dateCalc.getDate().toString();
+    if (parseInt(day) < 10) { 
+        day = '0' + day; 
+    } 
+            
+    if(desiredDate=="next week")
+    {   var firstDay = new Date(year+"/"+month+"/"+day);
+        var nextWeek = new Date(firstDay.getTime() + 7 * 24 * 60 * 60 * 1000);
+        cy.log(year+"/"+month+"/"+day);
+        cy.log(nextWeek.toDateString());
+       
+        year = nextWeek.getFullYear();
+        cy.log(nextWeek.getMonth().toString());
+        var month = (nextWeek.getMonth()+1).toString();
+        if (parseInt(month)<10)
+         month = '0'+month;
+        var day = nextWeek.getDate().toString();
+        if (parseInt(day) < 10) { 
+           day = '0' + day; 
+        }             
+    }            
+    return year+"-"+month+"-"+day;        
 };

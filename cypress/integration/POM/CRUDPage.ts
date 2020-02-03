@@ -38,10 +38,18 @@ export  class CRUDPage extends Page {
         }
         else if(operation == "create" || operation == "edit")
         { 
-          assert.equal(entries[0], ++entries[1]);          
+          ++entries[1];
+          cy.waitUntil(()=>entries[0] == entries[1], {
+            timeout: 20000, 
+            interval: 500 
+          });          
         }
         else if (operation == "delete" || operation == "edit and delete")
-        { assert.equal(entries[0], --entries[1]);          
+        { --entries[1];
+          cy.waitUntil(()=>entries[0]==entries[1],{
+            timeout: 20000, 
+            interval: 500 
+          });          
         }
         this.userEntryMap.set(fullName,entries);          
       });      
@@ -59,7 +67,7 @@ export  class CRUDPage extends Page {
     cy.get(this.employeeList).contains(fullName).first().should('be.visible');
     cy.get(this.employeeList).contains(fullName).first().click();
     cy.get(this.deleteButton).click();  
-    cy.on('window:alert',cy.stub());   
+    cy.on('window:alert',cy.stub());          
   }
 
   public logout()

@@ -25,7 +25,8 @@ var CreatePage = /** @class */ (function (_super) {
         _this.lastNameField = "input[ng-model='selectedEmployee.lastName']";
         _this.startDateField = "input[ng-model='selectedEmployee.startDate']";
         _this.emailField = "input[ng-model='selectedEmployee.email']";
-        _this.addButton = "button[ng-show='isCreateForm']";
+        _this.addButton = "button[type='submit']";
+        _this.addText = "Add";
         return _this;
     }
     //actions
@@ -34,7 +35,7 @@ var CreatePage = /** @class */ (function (_super) {
         this.keyWords.EnterText(this.lastNameField, userRecord.lastName);
         this.keyWords.EnterText(this.startDateField, userRecord.startDate);
         this.keyWords.EnterText(this.emailField, userRecord.email);
-        cy.get(this.addButton).click();
+        cy.get(this.addButton).contains(this.addText).click();
     };
     return CreatePage;
 }(Page_1.Page));

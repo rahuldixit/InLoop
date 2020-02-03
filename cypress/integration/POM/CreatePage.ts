@@ -10,7 +10,8 @@ export class CreatePage extends Page {
   lastNameField = "input[ng-model='selectedEmployee.lastName']";
   startDateField = "input[ng-model='selectedEmployee.startDate']";
   emailField = "input[ng-model='selectedEmployee.email']";
-  addButton = "button[ng-show='isCreateForm']";
+  addButton = "button[type='submit']";
+  addText = "Add";
 
   //actions
   public createRecord(userRecord: UserRecord )
@@ -19,7 +20,7 @@ export class CreatePage extends Page {
     this.keyWords.EnterText(this.lastNameField, userRecord.lastName);
     this.keyWords.EnterText(this.startDateField, userRecord.startDate);
     this.keyWords.EnterText(this.emailField, userRecord.email);    
-    cy.get(this.addButton).click();    
+    cy.get(this.addButton).contains(this.addText).click();    
   }    
 }
 

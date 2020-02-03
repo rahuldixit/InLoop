@@ -4,7 +4,7 @@
     "module": "commonjs",
     "target": "es5",
     "lib": ["es5", "dom"],
-    "types": ["cypress", "node"], // don't forget node here
+    "types": ["cypress", "node","cypress-wait-until"], // don't forget node here
     "esModuleInterop": true,
     "typeRoots": ["node_modules/@types"]
   },

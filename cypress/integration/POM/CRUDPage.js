@@ -51,10 +51,18 @@ var CRUDPage = /** @class */ (function (_super) {
                 entries[1] = entries[0];
             }
             else if (operation == "create" || operation == "edit") {
-                assert.equal(entries[0], ++entries[1]);
+                ++entries[1];
+                cy.waitUntil(function () { return entries[0] == entries[1]; }, {
+                    timeout: 20000,
+                    interval: 500
+                });
             }
             else if (operation == "delete" || operation == "edit and delete") {
-                assert.equal(entries[0], --entries[1]);
+                --entries[1];
+                cy.waitUntil(function () { return entries[0] == entries[1]; }, {
+                    timeout: 20000,
+                    interval: 500
+                });
             }
             _this.userEntryMap.set(fullName, entries);
         });
@@ -69,6 +77,7 @@ var CRUDPage = /** @class */ (function (_super) {
         cy.get(this.employeeList).contains(fullName).first().click();
         cy.get(this.deleteButton).click();
         cy.on('window:alert', cy.stub());
+        cy.get(this.employeeList).get("li").first().trigger('mouseover');
     };
     CRUDPage.prototype.logout = function () {
         cy.get(this.logoutButton).click();
