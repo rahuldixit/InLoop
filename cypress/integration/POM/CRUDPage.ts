@@ -67,7 +67,8 @@ export  class CRUDPage extends Page {
     cy.get(this.employeeList).contains(fullName).first().should('be.visible');
     cy.get(this.employeeList).contains(fullName).first().click();
     cy.get(this.deleteButton).click();  
-    cy.on('window:alert',cy.stub());          
+    cy.on('window:alert',cy.stub());
+    cy.get(this.employeeList).get("li").first().trigger('mouseover');      
   }
 
   public logout()
