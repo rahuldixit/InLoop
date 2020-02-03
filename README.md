@@ -17,3 +17,5 @@ This is a sample Cypress archtecture for test suites containing the following im
 If you are pulling from the github repo and want to run it locally, please remember to do an 'npm update' then 'npx cypress run --browser=chrome'
 
 If you want to see the flow working with circleci, make a cosmetic change like add a comment to the feature file '#abc' and commit. the workflow should be automtically triggered.
+
+CircleCI: test summary is displayed. Test report is in artefact section 'full_report.html' in cypress/reports/assets folder. Video of test run in cypress/videos and a failure screenshot (only if failed) and debugging log in cypress/screenshots. 
