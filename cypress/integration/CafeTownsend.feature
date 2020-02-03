@@ -25,3 +25,4 @@ Feature: Cafe Townsend
     Then the correct number of entries is displayed after: "delete"   
     When I logout
     Then I logout correctly
+    
