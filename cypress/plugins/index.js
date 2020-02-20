@@ -6,7 +6,7 @@ const jsonfile = require('jsonfile');
 module.exports = (on, config) => {
   
     const result = excelToJson({
-    sourceFile: 'C:/cypressRahul/InLoop/cypress/fixtures/TestData.xlsx',
+    sourceFile: './cypress/fixtures/TestData.xlsx',
     header: {
 
         rows: 1 
@@ -16,7 +16,7 @@ module.exports = (on, config) => {
     }
     });
     
-    var file = 'C:/cypressRahul/InLoop/cypress/fixtures/TestData.json'
+    var file = './cypress/fixtures/TestData.json'
     jsonfile.writeFile(file, result);
 
     // `on` is used to hook into various events Cypress emits
