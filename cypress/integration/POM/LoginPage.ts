@@ -1,5 +1,6 @@
 import {Page} from "./Page";
 
+
 export  class LoginPage extends Page {
   
   //elements
@@ -12,8 +13,11 @@ export  class LoginPage extends Page {
   //actions
   public login()
   {
-     this.keyWords.EnterText(this.username,"Luke");   
-     this.keyWords.EnterText(this.password,"Skywalker");    
+     cy.get(this.credentials).invoke('text').then((x)=>{return x.toString().match('(?<=Username: ").*?(?=")')}).as('usernameCredential');
+     cy.get(this.credentials).invoke('text').then((x)=>{return x.toString().match('(?<=Password: ").*?(?=")')}).as('passwordCredential');
+    
+     cy.get('@usernameCredential').then((x)=>{this.keyWords.EnterText(this.username,x.toString())}); 
+     cy.get('@passwordCredential').then((x)=>{this.keyWords.EnterText(this.password,x.toString())});  
      cy.get(this.submit).click(); 
   } 
 }

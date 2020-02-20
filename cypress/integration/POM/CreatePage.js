@@ -30,11 +30,12 @@ var CreatePage = /** @class */ (function (_super) {
         return _this;
     }
     //actions
-    CreatePage.prototype.createRecord = function (userRecord) {
-        this.keyWords.EnterText(this.firstNameField, userRecord.firstName);
-        this.keyWords.EnterText(this.lastNameField, userRecord.lastName);
-        this.keyWords.EnterText(this.startDateField, userRecord.startDate);
-        this.keyWords.EnterText(this.emailField, userRecord.email);
+    CreatePage.prototype.createRecord = function () {
+        var _this = this;
+        cy.get('@userRecord').then(function (x) { _this.keyWords.EnterText(_this.firstNameField, x.firstName); });
+        cy.get('@userRecord').then(function (x) { _this.keyWords.EnterText(_this.lastNameField, x.lastName); });
+        cy.get('@userRecord').then(function (x) { _this.keyWords.EnterText(_this.startDateField, x.startDate); });
+        cy.get('@userRecord').then(function (x) { _this.keyWords.EnterText(_this.emailField, x.email); });
         cy.get(this.addButton).contains(this.addText).click();
     };
     return CreatePage;

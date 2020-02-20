@@ -30,18 +30,20 @@ var EditPage = /** @class */ (function (_super) {
         return _this;
     }
     //actions
-    EditPage.prototype.editAndUpdate = function (userRecord) {
-        this.keyWords.EnterText(this.firstNameField, userRecord.firstName);
-        this.keyWords.EnterText(this.lastNameField, userRecord.lastName);
-        this.keyWords.EnterText(this.startDateField, userRecord.startDate);
-        this.keyWords.EnterText(this.emailField, userRecord.email);
+    EditPage.prototype.editAndUpdate = function () {
+        var _this = this;
+        cy.get('@userRecord').then(function (x) { _this.keyWords.EnterText(_this.firstNameField, x.firstName); });
+        cy.get('@userRecord').then(function (x) { _this.keyWords.EnterText(_this.lastNameField, x.lastName); });
+        cy.get('@userRecord').then(function (x) { _this.keyWords.EnterText(_this.startDateField, x.startDate); });
+        cy.get('@userRecord').then(function (x) { _this.keyWords.EnterText(_this.emailField, x.email); });
         cy.get("button[type='submit']").contains(this.updateButtonText).click();
     };
-    EditPage.prototype.checkUserDetails = function (userRecord) {
-        cy.get(this.firstNameField).invoke('val').then(function (x) { assert(userRecord.firstName, x.toString()); });
-        cy.get(this.lastNameField).invoke('val').then(function (x) { assert(userRecord.lastName, x.toString()); });
-        cy.get(this.startDateField).invoke('val').then(function (x) { assert(userRecord.startDate, x.toString()); });
-        cy.get(this.emailField).invoke('val').then(function (x) { assert(userRecord.email, x.toString()); });
+    EditPage.prototype.checkUserDetails = function () {
+        var _this = this;
+        cy.get("@userRecord").then(function (x) { return cy.get(_this.firstNameField).invoke('val').then(function (y) { assert(x.firstName, y.toString()); }); });
+        cy.get("@userRecord").then(function (x) { return cy.get(_this.lastNameField).invoke('val').then(function (y) { assert(x.lastName, y.toString()); }); });
+        cy.get("@userRecord").then(function (x) { return cy.get(_this.startDateField).invoke('val').then(function (y) { assert(x.startDate, y.toString()); }); });
+        cy.get("@userRecord").then(function (x) { return cy.get(_this.emailField).invoke('val').then(function (y) { assert(x.email, y.toString()); }); });
     };
     EditPage.prototype.deleteRecord = function () {
         cy.get(".main-button").contains(this.deleteButtonText).click();

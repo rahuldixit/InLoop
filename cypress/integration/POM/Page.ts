@@ -11,6 +11,7 @@ export abstract class Page {
   isPageLoaded() 
   {
       cy.get(this.anchor).should('be.visible');
+      cy.eyesCheckWindow({});
   }
 }
 

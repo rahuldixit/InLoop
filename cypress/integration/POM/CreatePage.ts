@@ -14,12 +14,12 @@ export class CreatePage extends Page {
   addText = "Add";
 
   //actions
-  public createRecord(userRecord: UserRecord )
+  public createRecord( )
   {
-    this.keyWords.EnterText(this.firstNameField, userRecord.firstName);
-    this.keyWords.EnterText(this.lastNameField, userRecord.lastName);
-    this.keyWords.EnterText(this.startDateField, userRecord.startDate);
-    this.keyWords.EnterText(this.emailField, userRecord.email);    
+    cy.get('@userRecord').then((x: any)=>{this.keyWords.EnterText(this.firstNameField, x.firstName)});    
+    cy.get('@userRecord').then((x: any)=>{this.keyWords.EnterText(this.lastNameField, x.lastName)});
+    cy.get('@userRecord').then((x: any)=>{this.keyWords.EnterText(this.startDateField, x.startDate)});    
+    cy.get('@userRecord').then((x: any)=>{this.keyWords.EnterText(this.emailField, x.email)});        
     cy.get(this.addButton).contains(this.addText).click();    
   }    
 }

@@ -8,6 +8,7 @@ var Page = /** @class */ (function () {
     }
     Page.prototype.isPageLoaded = function () {
         cy.get(this.anchor).should('be.visible');
+        cy.eyesCheckWindow({});
     };
     return Page;
 }());

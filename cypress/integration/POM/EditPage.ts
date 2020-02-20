@@ -14,21 +14,21 @@ export class EditPage extends Page {
   deleteButtonText = "Delete";
 
   //actions
-  public editAndUpdate(userRecord: UserRecord )
+  public editAndUpdate()
   {
-    this.keyWords.EnterText(this.firstNameField, userRecord.firstName);
-    this.keyWords.EnterText(this.lastNameField, userRecord.lastName);
-    this.keyWords.EnterText(this.startDateField, userRecord.startDate);
-    this.keyWords.EnterText(this.emailField, userRecord.email);    
+    cy.get('@userRecord').then((x: any)=>{this.keyWords.EnterText(this.firstNameField, x.firstName)});    
+    cy.get('@userRecord').then((x: any)=>{this.keyWords.EnterText(this.lastNameField, x.lastName)});
+    cy.get('@userRecord').then((x: any)=>{this.keyWords.EnterText(this.startDateField, x.startDate)});    
+    cy.get('@userRecord').then((x: any)=>{this.keyWords.EnterText(this.emailField, x.email)});        
     cy.get("button[type='submit']").contains(this.updateButtonText).click();    
   }
   
-  public checkUserDetails(userRecord: UserRecord)
-  {
-    cy.get(this.firstNameField).invoke('val').then((x)=>{assert(userRecord.firstName, x.toString())});
-    cy.get(this.lastNameField).invoke('val').then((x)=>{assert(userRecord.lastName, x.toString())});    
-    cy.get(this.startDateField).invoke('val').then((x)=>{assert(userRecord.startDate, x.toString())});
-    cy.get(this.emailField).invoke('val').then((x)=>{assert(userRecord.email, x.toString())});        
+  public checkUserDetails()
+  {    
+    cy.get("@userRecord").then((x:any)=>cy.get(this.firstNameField).invoke('val').then((y)=>{assert(x.firstName, y.toString())}));
+    cy.get("@userRecord").then((x:any)=>cy.get(this.lastNameField).invoke('val').then((y)=>{assert(x.lastName, y.toString())}));
+    cy.get("@userRecord").then((x:any)=>cy.get(this.startDateField).invoke('val').then((y)=>{assert(x.startDate, y.toString())}));
+    cy.get("@userRecord").then((x:any)=>cy.get(this.emailField).invoke('val').then((y)=>{assert(x.email, y.toString())}));   
   }
 
   public deleteRecord()

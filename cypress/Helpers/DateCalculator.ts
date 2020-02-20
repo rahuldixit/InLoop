@@ -15,11 +15,8 @@ export function DateCalculator(desiredDate: string) : string
     if(desiredDate=="next week")
     {   var firstDay = new Date(year+"/"+month+"/"+day);
         var nextWeek = new Date(firstDay.getTime() + 7 * 24 * 60 * 60 * 1000);
-        cy.log(year+"/"+month+"/"+day);
-        cy.log(nextWeek.toDateString());
        
         year = nextWeek.getFullYear();
-        cy.log(nextWeek.getMonth().toString());
         var month = (nextWeek.getMonth()+1).toString();
         if (parseInt(month)<10)
          month = '0'+month;

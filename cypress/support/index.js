@@ -14,28 +14,83 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
+
+import '@applitools/eyes-cypress/commands'
 import './commands';
+import {getCellByName} from '../JSONReader/JSONReader'
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
-import {Log} from "./../Log/Log";
+
+const xhrData = [];
 
     //Hooks
-    before(async function () {
-        // runs once before all tests in the block        
- 
+    before(function () {
+        cy.fixture('./TestData').as('TestData');                       
+
+        // runs once before all tests in the block
+        cy.server({
+            // Here we hanDle all requests passing through Cypress' server
+            onResponse: (response) => {
+            if (Cypress.env('record')) {
+                const url = response.url;
+                const method = response.method;
+                const data = response.response.body;
+                // We push a new entry into the xhrData array
+                xhrData.push({ url, method, data });
+            }
+            },
+        });
+
+        // This tells Cypress to hook into any GET request
+        if (Cypress.env('record')) {
+            cy.route({
+            method: 'GET',
+            url: '*',
+            });
+            cy.route({
+                method: 'POST',
+                url: '*',
+                });
+        }
+
+        // Load stubbed data from local JSON file
+        if (!Cypress.env('record')) {
+            cy.fixture('fixture')
+            .then((data) => {
+                for (let i = 0, length = data.length; i < length; i++) {
+                cy.route(data[i].method, data[i].url, data[i].data);
+                }
+            });
+        }
     });
+
     after(function () {
-        // runs once after all tests in the block
+        // runs once after all tests in the block        
     });
-    beforeEach(function () {
-        Log("Test starting!");
+    
+    beforeEach(function () {        
+
         cy.visit(Cypress.config().baseUrl);
         // runs before each test in the block
+        cy.eyesOpen({
+            appName: 'CafeTownsend',
+            testName: 'Complete Happy Path',
+            browser: {
+                "viewportWidth": 1000,
+                "viewportHeight": 660
+              },
+          }); 
     });
+    
     afterEach(function () {
         // runs after each test in the block
-        
+        cy.eyesClose();
+        if (Cypress.env('record')) {
+            const path = './cypress/fixtures/fixture.json';
+            cy.writeFile(path, xhrData);
+            cy.log("Wrote "+ xhrData.length +" XHR responses to local file "+path);
+        }        
     });
 
 

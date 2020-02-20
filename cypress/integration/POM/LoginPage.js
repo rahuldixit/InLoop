@@ -28,8 +28,11 @@ var LoginPage = /** @class */ (function (_super) {
     }
     //actions
     LoginPage.prototype.login = function () {
-        this.keyWords.EnterText(this.username, "Luke");
-        this.keyWords.EnterText(this.password, "Skywalker");
+        var _this = this;
+        cy.get(this.credentials).invoke('text').then(function (x) { return x.toString().match('(?<=Username: ").*?(?=")'); }).as('usernameCredential');
+        cy.get(this.credentials).invoke('text').then(function (x) { return x.toString().match('(?<=Password: ").*?(?=")'); }).as('passwordCredential');
+        cy.get('@usernameCredential').then(function (x) { _this.keyWords.EnterText(_this.username, x.toString()); });
+        cy.get('@passwordCredential').then(function (x) { _this.keyWords.EnterText(_this.password, x.toString()); });
         cy.get(this.submit).click();
     };
     return LoginPage;

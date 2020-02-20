@@ -1,12 +1,12 @@
 {
   "projectId": "aeyi8k",
-  "baseUrl": "http://cafetownsend-angular-rails.herokuapp.com/login",
+  "baseUrl": "http://cafetownsend-angular-rails.herokuapp.com/login", 
   "numTestsKeptInMemory": 50,
   "port": 4300,
   "watchForFileChanges": false,
-  "defaultCommandTimeout": 20000,
-  "execTimeout": 20000,
-  "taskTimeout": 20000,
+  "defaultCommandTimeout": 60000,
+  "execTimeout": 60000,
+  "taskTimeout": 60000,
   "pageLoadTimeout": 60000,
   "requestTimeout": 60000,
   "responseTimeout": 60000,
@@ -25,5 +25,7 @@
   "chromeWebSecurity": true,
   "animationDistanceThreshold": 5,
   "waitForAnimations": true,
-  "projectId": "aeyi8k"
+  "env": {
+    "record": "false"
+  }    
 }
