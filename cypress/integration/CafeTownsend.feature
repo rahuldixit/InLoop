@@ -1,5 +1,4 @@
 Feature: Cafe Townsend
-
   #Tests chained into one test to reduce execution time. Separate tests will cause execution time to bloat up in CI runs.
   #The size of test allows for chained crud operations without multiple logins and recreation of user records.
   Scenario: CRUD Operations on Cafe Townsend

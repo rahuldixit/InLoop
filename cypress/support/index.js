@@ -12,15 +12,8 @@
 // You can read more here:
 // https://on.cypress.io/configuration
 // ***********************************************************
-
-// Import commands.js using ES2015 syntax:
-
-import '@applitools/eyes-cypress/commands'
+import '@applitools/eyes-cypress/commands';
 import './commands';
-import {getCellByName} from '../JSONReader/JSONReader'
-
-// Alternatively you can use CommonJS syntax:
-// require('./commands')
 
 const xhrData = [];
 
@@ -64,10 +57,6 @@ const xhrData = [];
             });
         }
     });
-
-    after(function () {
-        // runs once after all tests in the block        
-    });
     
     beforeEach(function () {        
 
@@ -80,17 +69,22 @@ const xhrData = [];
                 "viewportWidth": 1000,
                 "viewportHeight": 660
               },
-          }); 
+          });                       
     });
     
-    afterEach(function () {
-        // runs after each test in the block
-        cy.eyesClose();
+    after(function () {
+        // runs once after all tests in the block        
         if (Cypress.env('record')) {
             const path = './cypress/fixtures/fixture.json';
             cy.writeFile(path, xhrData);
             cy.log("Wrote "+ xhrData.length +" XHR responses to local file "+path);
-        }        
+        } 
+    });
+
+    afterEach(function () {
+        // runs after each test in the block
+        cy.eyesClose();
+        cy.reload();            
     });
 
 

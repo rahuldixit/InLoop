@@ -125,7 +125,6 @@ var CRUDPage = /** @class */ (function (_super) {
                                     ++data.entries[0];
                                 }
                             });
-                            cy.log(data.entries[0] + " " + data.entries[1]);
                             return [2 /*return*/, data.entries[0] == data.entries[1]];
                         });
                     }); }, {

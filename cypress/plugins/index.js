@@ -28,5 +28,4 @@ module.exports = (on, config) => {
     on('file:preprocessor', cucumber(options));  
 };
 
-
 require('@applitools/eyes-cypress')(module);

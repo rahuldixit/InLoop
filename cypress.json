@@ -4,6 +4,7 @@
   "numTestsKeptInMemory": 50,
   "port": 4300,
   "watchForFileChanges": false,
+  "eyesTimeout" : 120000,
   "defaultCommandTimeout": 60000,
   "execTimeout": 60000,
   "taskTimeout": 60000,
@@ -22,7 +23,7 @@
   "videoCompression": 32,
   "video": true,
   "videoUploadOnPasses": true,
-  "chromeWebSecurity": true,
+  "chromeWebSecurity": false,
   "animationDistanceThreshold": 5,
   "waitForAnimations": true,
   "env": {
