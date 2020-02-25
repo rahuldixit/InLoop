@@ -4,7 +4,8 @@ import { LoginPage } from "../POM/LoginPage";
 let loginPage = new LoginPage();
      
 Given(/I login/, () => { 
-  loginPage.login();    
+  loginPage.login();
+  loginPage.isPageLoaded();    
 });
 
 Then("I logout correctly",  () => {

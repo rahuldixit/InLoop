@@ -22,6 +22,7 @@ jobs:
           paths:
             - ~/.npm
             - ~/.cache
+      - run: "export APPLITOOLS_BATCH_ID='echo $CIRCLE_SHA1'"
       - run:
           name: Running E2E tests 
           command: npx cypress run --reporter cypress-multi-reporters --reporter-options configFile=reports.json --record --key 59ebea57-7d86-4e86-891e-92c68a93c6bd

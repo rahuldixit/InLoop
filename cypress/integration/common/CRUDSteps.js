@@ -43,9 +43,11 @@ var CreatePage_1 = require("../POM/CreatePage");
 var EditPage_1 = require("../POM/EditPage");
 var DateCalculator_1 = require("../../Helpers/DateCalculator");
 var JSONReader_1 = require("./../../JSONReader/JSONReader");
+var LoginPage_1 = require("../POM/LoginPage");
 var crudPage = new CRUDPage_1.CRUDPage();
 var createPage = new CreatePage_1.CreatePage();
 var editPage = new EditPage_1.EditPage();
+var loginPage = new LoginPage_1.LoginPage();
 steps_1.When("I create new profile", function () {
     cy.get('@TestData').then(function (x) { return __awaiter(void 0, void 0, void 0, function () {
         var userRecord;
@@ -64,6 +66,7 @@ steps_1.When("I create new profile", function () {
     crudPage.isPageLoaded();
     crudPage.checkNoEntries("initial");
     crudPage.create();
+    createPage.isPageLoaded();
     createPage.createRecord();
     crudPage.isPageLoaded();
 });
@@ -90,24 +93,29 @@ steps_1.When("I edit the new profile", function () {
     }); }); }).as('fullName');
 });
 steps_1.When("I edit and delete the new profile", function () {
+    crudPage.isPageLoaded();
     crudPage.edit();
     editPage.isPageLoaded();
     editPage.deleteRecord();
     crudPage.isPageLoaded();
 });
 steps_1.When("I delete the new profile", function () {
+    crudPage.isPageLoaded();
     crudPage.delete();
     crudPage.isPageLoaded();
 });
 steps_1.When("I logout", function () {
     crudPage.logout();
+    loginPage.isPageLoaded();
 });
 steps_1.Then("the correct number of entries is displayed after: {string}", function (operation) {
     crudPage.checkNoEntries(operation);
 });
 steps_1.Then("profile is updated correctly", function () {
+    crudPage.isPageLoaded();
     crudPage.edit();
     editPage.isPageLoaded();
     editPage.checkUserDetails();
     cy.get(editPage.backButton).click();
+    crudPage.isPageLoaded();
 });

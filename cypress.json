@@ -23,7 +23,7 @@
   "videoCompression": 32,
   "video": true,
   "videoUploadOnPasses": true,
-  "chromeWebSecurity": false,
+  "chromeWebSecurity": true,
   "animationDistanceThreshold": 5,
   "waitForAnimations": true,
   "env": {

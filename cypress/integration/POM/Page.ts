@@ -5,8 +5,7 @@ export abstract class Page {
   public anchor :string = "";
   public keyWords = new Keywords();
 
-  constructor() {  
-    this.isPageLoaded();      
+  constructor() {            
   }
   
   isPageLoaded() 

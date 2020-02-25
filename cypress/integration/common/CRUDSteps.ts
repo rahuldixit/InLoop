@@ -4,11 +4,13 @@ import { UserRecord } from "../../DataObjects/UserRecord";
 import { CreatePage } from "../POM/CreatePage";
 import { EditPage } from "../POM/EditPage";
 import { DateCalculator } from "../../Helpers/DateCalculator";
-import {getCellByName} from './../../JSONReader/JSONReader'
+import {getCellByName} from './../../JSONReader/JSONReader';
+import { LoginPage } from "../POM/LoginPage";
 
 var crudPage = new CRUDPage();
 var createPage = new CreatePage();
 var editPage = new EditPage();
+var loginPage = new LoginPage();
 
 When("I create new profile", () => {   
   
@@ -23,6 +25,7 @@ When("I create new profile", () => {
   crudPage.checkNoEntries("initial");      
   
   crudPage.create();
+  createPage.isPageLoaded();
   createPage.createRecord();
   crudPage.isPageLoaded();
 });
@@ -48,6 +51,7 @@ When("I edit the new profile", () => {
 });
 
 When("I edit and delete the new profile",  () => {
+  crudPage.isPageLoaded();
   crudPage.edit();
   editPage.isPageLoaded();
 
@@ -56,12 +60,14 @@ When("I edit and delete the new profile",  () => {
 });
 
 When("I delete the new profile",  () => {
+  crudPage.isPageLoaded();
   crudPage.delete();
   crudPage.isPageLoaded();
 });
 
 When("I logout",  () => {
-  crudPage.logout();
+  crudPage.logout(); 
+  loginPage.isPageLoaded(); 
 });
 
 Then("the correct number of entries is displayed after: {string}", (operation)=>  {   
@@ -69,9 +75,11 @@ Then("the correct number of entries is displayed after: {string}", (operation)=>
 });
 
 Then("profile is updated correctly", ()=>  {  
+  crudPage.isPageLoaded();
   crudPage.edit();
   editPage.isPageLoaded();
 
   editPage.checkUserDetails();  
   cy.get(editPage.backButton).click();
+  crudPage.isPageLoaded();
 });

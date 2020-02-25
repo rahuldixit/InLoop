@@ -5,6 +5,7 @@ var LoginPage_1 = require("../POM/LoginPage");
 var loginPage = new LoginPage_1.LoginPage();
 steps_1.Given(/I login/, function () {
     loginPage.login();
+    loginPage.isPageLoaded();
 });
 steps_1.Then("I logout correctly", function () {
     loginPage.isPageLoaded();

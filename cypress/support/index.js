@@ -32,9 +32,9 @@ const xhrData = [];
                 // We push a new entry into the xhrData array
                 xhrData.push({ url, method, data });
             }
-            },
+            }
         });
-
+        
         // This tells Cypress to hook into any GET request
         if (Cypress.env('record')) {
             cy.route({
@@ -52,7 +52,7 @@ const xhrData = [];
             cy.fixture('fixture')
             .then((data) => {
                 for (let i = 0, length = data.length; i < length; i++) {
-                cy.route(data[i].method, data[i].url, data[i].data);
+                    cy.route(data[i].method, data[i].url, data[i].data);
                 }
             });
         }
